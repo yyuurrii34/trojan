@@ -175,14 +175,14 @@ WantedBy=multi-user.target
 EOF
 
         #设置fastopen和防火墙
-	systemctl stop firewalld
-	systemctl disable firewalld
-	systemctl mask firewalld
-	yum install -y iptables-services
-	systemctl enable iptables
-	systemctl start iptables
-	echo 'net.ipv4.tcp_fastopen=3' | tee -a /etc/sysctl.conf
-	sysctl -p
+	#systemctl stop firewalld
+	#systemctl disable firewalld
+	#systemctl mask firewalld
+	#yum install -y iptables-services
+	#systemctl enable iptables
+	#systemctl start iptables
+	#echo 'net.ipv4.tcp_fastopen=3' | tee -a /etc/sysctl.conf
+	#sysctl -p
 	#启动trojan.service
 	chmod +x /usr/lib/systemd/system/trojan.service
 	systemctl start trojan.service
