@@ -53,7 +53,7 @@ if [ $real_addr == $local_addr ] ; then
 	#设置伪装站
 	rm -rf /usr/share/nginx/html/*
 	cd /usr/share/nginx/html/
-	wget https://github.com/atrandys/v2ray-ws-tls/raw/master/web.zip
+	wget https://github.com/yyuurrii34/trojan/raw/master/web.zip
     	unzip web.zip
 	systemctl start nginx.service
 	#申请https证书
@@ -69,7 +69,7 @@ if [ $real_addr == $local_addr ] ; then
 	wget https://github.com/trojan-gfw/trojan/releases/download/v1.13.0/trojan-1.13.0-linux-amd64.tar.xz
 	tar xf trojan-1.*
 	#下载trojan客户端
-	wget https://github.com/atrandys/trojan/raw/master/trojan-cli.zip
+	wget https://github.com/yyuurrii34/trojan/raw/master/trojan-cli.zip
 	unzip trojan-cli.zip
 	cp /usr/src/trojan-cert/fullchain.cer /usr/src/trojan-cli/fullchain.cer
 	trojan_passwd=$(cat /dev/urandom | head -1 | md5sum | head -c 8)
@@ -101,7 +101,7 @@ if [ $real_addr == $local_addr ] ; then
     "tcp": {
         "no_delay": true,
         "keep_alive": true,
-        "fast_open": false,
+        "fast_open": true,
         "fast_open_qlen": 20
     }
 }
@@ -137,7 +137,7 @@ EOF
     "tcp": {
         "no_delay": true,
         "keep_alive": true,
-        "fast_open": false,
+        "fast_open": true,
         "fast_open_qlen": 20
     },
     "mysql": {
@@ -174,9 +174,20 @@ PrivateTmp=true
 WantedBy=multi-user.target
 EOF
 
+        #设置fastopen和防火墙
+	systemctl stop firewalld
+	systemctl disable firewalld
+	systemctl mask firewalld
+	yum install -y iptables-services
+	systemctl enable iptables
+	systemctl start iptables
+	echo 'net.ipv4.tcp_fastopen=3' | tee -a /etc/sysctl.conf
+	sysctl -p
+	#启动trojan.service
 	chmod +x /usr/lib/systemd/system/trojan.service
 	systemctl start trojan.service
 	systemctl enable trojan.service
+	
 	green "======================================================================"
 	green "Trojan已安装完成，请使用以下链接下载trojan客户端，此客户端已配置好所有参数"
 	green "1、复制下面的链接，在浏览器打开，下载客户端"
