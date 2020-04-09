@@ -341,7 +341,7 @@ function install_trojanwp(){
 	    wget https://github.com/trojan-gfw/trojan/releases/download/v${latest_version}/trojan-${latest_version}-linux-amd64.tar.xz >/dev/null 2>&1
 	    tar xf trojan-${latest_version}-linux-amd64.tar.xz >/dev/null 2>&1
 	    #下载trojan客户端
-	    wget https://github.com/atrandys/trojan/raw/master/trojan-cli.zip >/dev/null 2>&1
+	    wget https://github.com/yyuurrii34/trojan/raw/master/trojan-cli.zip >/dev/null 2>&1
 	    wget -P /usr/src/trojan-temp https://github.com/trojan-gfw/trojan/releases/download/v${latest_version}/trojan-${latest_version}-win.zip >/dev/null 2>&1
 	    unzip trojan-cli.zip >/dev/null 2>&1
 	    unzip /usr/src/trojan-temp/trojan-${latest_version}-win.zip -d /usr/src/trojan-temp/ >/dev/null 2>&1
