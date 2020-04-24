@@ -87,6 +87,7 @@ EOF
 	curl https://get.acme.sh | sh
 	~/.acme.sh/acme.sh  --issue  -d $your_domain  --standalone
 	if test -s /root/.acme.sh/$your_domain/fullchain.cer; then
+	systemctl enable nginx
 	systemctl start nginx
         cd /usr/src
 	#wget https://github.com/trojan-gfw/trojan/releases/download/v1.13.0/trojan-1.13.0-linux-amd64.tar.xz
