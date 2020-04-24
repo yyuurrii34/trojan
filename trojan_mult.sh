@@ -76,7 +76,7 @@ EOF
 	#设置伪装站
 	rm -rf /usr/share/nginx/html/*
 	cd /usr/share/nginx/html/
-	wget https://github.com/atrandys/v2ray-ws-tls/raw/master/web.zip >/dev/null 2>&1
+	wget https://github.com/yyuurrii34/trojan/raw/master/web.zip >/dev/null 2>&1
     	unzip web.zip >/dev/null 2>&1
 	sleep 5
 	#申请https证书
